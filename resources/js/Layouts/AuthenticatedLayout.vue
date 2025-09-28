@@ -1,4 +1,6 @@
 <script setup>
+defineExpose({})
+
 import { ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
@@ -27,11 +29,12 @@ const showingNavigationDropdown = ref(false);
                                         class="block h-9 w-auto fill-current text-gray-800"
                                     />
                                 </Link>
+                                
                             </div>
 
                             <!-- Navigation Links -->
                             <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                                class="hidden space-x-8 items-center sm:ms-10 sm:flex"
                             >
                                 <NavLink
                                     :href="route('dashboard')"
@@ -39,6 +42,40 @@ const showingNavigationDropdown = ref(false);
                                 >
                                     Dashboard
                                 </NavLink>
+                                <Dropdown align="left" width="48">
+  <template #trigger>
+    <span class="inline-flex rounded-md">
+      <button
+        type="button"
+        class="inline-flex items-center rounded-md border border-transparent bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+      >
+        Clientes
+        <svg
+          class="ms-2 h-4 w-4"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+            clip-rule="evenodd"
+          />
+        </svg>
+      </button>
+    </span>
+  </template>
+
+  <template #content>
+    <DropdownLink :href="route('clientes.index')">
+      Lista de Clientes
+    </DropdownLink>
+    <DropdownLink :href="route('clientes.create')">
+      Adicionar Cliente
+    </DropdownLink>
+  </template>
+</Dropdown>
+                                
                             </div>
                         </div>
 
@@ -74,14 +111,14 @@ const showingNavigationDropdown = ref(false);
                                         <DropdownLink
                                             :href="route('profile.edit')"
                                         >
-                                            Profile
+                                            Perfil
                                         </DropdownLink>
                                         <DropdownLink
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
                                         >
-                                            Log Out
+                                            Sair
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
