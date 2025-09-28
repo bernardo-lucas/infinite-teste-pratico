@@ -1,8 +1,19 @@
 <script setup>
 import { router } from '@inertiajs/vue3'
+import { ref, onMounted } from 'vue'
 
 function logout() {
   router.post(route('logout'))
+}
+const dark = ref(false)
+
+onMounted(() => {
+  dark.value = document.documentElement.classList.contains('dark')
+})
+
+function toggleDark() {
+  document.documentElement.classList.toggle('dark')
+  dark.value = !dark.value
 }
 </script>
 

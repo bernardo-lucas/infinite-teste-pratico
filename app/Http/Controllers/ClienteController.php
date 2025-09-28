@@ -13,12 +13,13 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class ClienteController extends Controller
 {
     use AuthorizesRequests;
+
 public function index()
 {
-    $clientes = auth()->user()->clientes()->latest()->get();
+    $clientes = Cliente::orderBy('created_at', 'desc')->paginate(10);
 
     return Inertia::render('Clientes/Index', [
-        'clientes' => $clientes
+        'clientes' => $clientes,
     ]);
 }
 public function create()
