@@ -38,11 +38,11 @@ const submit = () => {
 
     <form @submit.prevent="submit">
       <div>
-        <InputLabel for="email" value="E-mail" />
+        <InputLabel class="dark:text-white" for="email" value="E-mail" />
         <TextInput
           id="email"
           type="email"
-          class="mt-1 block w-full"
+          class="dark:bg-zinc-500 dark:border-zinc-700 dark:text-white block w-full"
           v-model="form.email"
           required
           autofocus
@@ -52,11 +52,11 @@ const submit = () => {
       </div>
 
       <div class="mt-4">
-        <InputLabel for="password" value="Senha" />
+        <InputLabel class="dark:text-white" for="password" value="Senha" />
         <TextInput
           id="password"
           type="password"
-          class="mt-1 block w-full"
+          class="dark:bg-zinc-500 dark:border-zinc-700 dark:text-white mt-1 block w-full "
           v-model="form.password"
           required
           autocomplete="current-password"
@@ -67,7 +67,7 @@ const submit = () => {
       <div class="mt-4 block">
         <label class="flex items-center">
           <Checkbox name="remember" v-model:checked="form.remember" />
-          <span class="ms-2 text-sm text-gray-600">Lembre meu acesso</span>
+          <span class="dark:text-white ms-2 text-sm text-gray-600">Lembre meu acesso</span>
         </label>
       </div>
 
@@ -75,7 +75,7 @@ const submit = () => {
         <Link
           v-if="canResetPassword"
           :href="route('password.request')"
-          class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          class="dark:text-white rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           Esqueci minha senha
         </Link>

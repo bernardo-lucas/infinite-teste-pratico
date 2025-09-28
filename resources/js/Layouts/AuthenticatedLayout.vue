@@ -128,6 +128,7 @@ function toggleDark() {
         
             <DropdownLink
             as="button"
+            href="#"
             @click="toggleDark"
             class="dark:text-gray-100 dark:hover:bg-zinc-700"
             >

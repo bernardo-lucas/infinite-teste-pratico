@@ -34,6 +34,11 @@ Route::middleware('auth')->group(function () {
 
 
 });
+Route::get('/', function () {
+    return Auth::check()
+        ? redirect()->route('dashboard')
+        : redirect()->route('login');
+});
 
 
 
