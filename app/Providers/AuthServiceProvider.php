@@ -16,8 +16,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Cliente::class => ClientePolicy::class,
+        \App\Models\Cliente::class => \App\Policies\ClientePolicy::class,
     ];
 
+    
     /**
      * Register any authentication / authorization services.
      */
@@ -25,4 +27,5 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
     }
+    
 }

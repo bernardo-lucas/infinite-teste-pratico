@@ -9,7 +9,6 @@ const props = defineProps({
   clientesEsteMes: Number,
   clientesPorMes: Array
 })
-console.log(props.clientesPorMes)
 </script>
 
 <template>
@@ -28,12 +27,16 @@ console.log(props.clientesPorMes)
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div class="bg-white dark:bg-zinc-700 shadow-sm rounded-lg p-6 text-center">
             <h3 class="text-lg font-medium text-gray-700 dark:text-white">Total de Clientes</h3>
-            <p class="mt-2 text-2xl font-bold text-sky-900 dark:text-sky-400">{{ props.totalClientes }}</p>
+            <p class="mt-2 text-2xl font-bold text-sky-900 dark:text-sky-400">
+              {{ props.totalClientes }}
+            </p>
           </div>
 
           <div class="bg-white dark:bg-zinc-700 shadow-sm rounded-lg p-6 text-center">
             <h3 class="text-lg font-medium text-gray-700 dark:text-white">Clientes este mês</h3>
-            <p class="mt-2 text-2xl font-bold text-sky-900 dark:text-sky-400">{{ props.clientesEsteMes }}</p>
+            <p class="mt-2 text-2xl font-bold text-sky-900 dark:text-sky-400">
+              {{ props.clientesEsteMes }}
+            </p>
           </div>
 
           <div class="bg-white dark:bg-zinc-700 shadow-sm rounded-lg p-6 text-center">
@@ -42,26 +45,34 @@ console.log(props.clientesPorMes)
               {{ props.ultimoCliente?.nome || 'Nenhum cliente ainda' }}
             </p>
             <p class="text-sm text-gray-500">
-              {{ props.ultimoCliente?.created_at ? new Date(props.ultimoCliente.created_at).toLocaleDateString() : '' }}
+              {{
+                props.ultimoCliente?.created_at
+                  ? new Date(props.ultimoCliente.created_at).toLocaleDateString()
+                  : ''
+              }}
             </p>
           </div>
         </div>
 
         <!-- Gráfico simples -->
         <div class="bg-white dark:bg-zinc-700 shadow-sm rounded-lg p-6">
-          <h3 class="text-lg font-medium text-gray-700 dark:text-white mb-4">Clientes por mês</h3>
+          <h3 class="text-lg font-medium text-gray-700 dark:text-white mb-4">
+            Clientes por mês
+          </h3>
           <div class="grid grid-cols-6 gap-4 text-center">
             <div
               v-for="mes in props.clientesPorMes"
               :key="mes.mes"
-              class="flex flex-col items-center"
+              class="flex flex-col items-center justify-end h-32"
             >
               <div
                 class="w-6 bg-sky-800 dark:bg-sky-400 rounded"
                 :style="{ height: `${mes.quantidade * 10}px` }"
               ></div>
               <span class="text-sm mt-2">{{ mes.mes }}</span>
-              <span class="text-xs text-gray-500 dark:text-gray-400">{{ mes.quantidade }}</span>
+              <span class="text-xs text-gray-500 dark:text-gray-400">
+                {{ mes.quantidade }}
+              </span>
             </div>
           </div>
         </div>

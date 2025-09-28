@@ -13,6 +13,12 @@ class User extends Authenticatable
 {
     return $this->hasMany(Cliente::class);
 }
+
+public function user()
+{
+    return $this->belongsTo(User::class);
+}
+
     
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;

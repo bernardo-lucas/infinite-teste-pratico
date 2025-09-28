@@ -2,74 +2,105 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Cliente;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
-
-
 
 class ClienteController extends Controller
 {
     use AuthorizesRequests;
 
-public function index()
-{
-    $clientes = Cliente::orderBy('created_at', 'desc')->paginate(10);
+    /**
+     * Display a paginated listing of the authenticated user’s clientes.
+     */
+    public function index()
+    {
+        $this->authorize('viewAny', Cliente::class);
 
-    return Inertia::render('Clientes/Index', [
-        'clientes' => $clientes,
-    ]);
-}
-public function create()
-{
-    return Inertia::render('Clientes/Create');
-}
+        $clientes = auth()
+            ->user()
+            ->clientes()
+            ->paginate(10);
 
-public function store(Request $request)
-{
-    $validated = $request->validate([
-        'nome' => 'required|string|max:255',
-        'email' => 'required|email|unique:clientes,email',
-        'telefone' => 'nullable|string|max:20',
-    ]);
+        return Inertia::render('Clientes/Index', [
+            'clientes' => $clientes,
+        ]);
+    }
 
-    auth()->user()->clientes()->create($validated);
+    /**
+     * Show the form for creating a new cliente.
+     */
+    public function create()
+    {
+        $this->authorize('create', Cliente::class);
 
-    return redirect()->route('clientes.index')->with('success', 'Cliente criado com sucesso!');
-}
-public function edit(Cliente $cliente)
-{
-    $this->authorize('view', $cliente); // garante que o cliente pertence ao usuário
+        return Inertia::render('Clientes/Create');
+    }
 
-    return Inertia::render('Clientes/Edit', [
-        'cliente' => $cliente
-    ]);
-}
+    /**
+     * Store a newly created cliente in storage.
+     */
+    public function store(Request $request)
+    {
+        $this->authorize('create', Cliente::class);
 
-public function update(Request $request, Cliente $cliente)
-{
-    $this->authorize('update', $cliente);
+        $validated = $request->validate([
+            'nome'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:clientes,email',
+            'telefone' => 'nullable|string|max:20',
+        ]);
 
-    $validated = $request->validate([
-        'nome' => 'required|string|max:255',
-        'email' => 'required|email|unique:clientes,email,' . $cliente->id,
-        'telefone' => 'nullable|string|max:20',
-    ]);
+        auth()->user()->clientes()->create($validated);
 
-    $cliente->update($validated);
+        return redirect()
+            ->route('clientes.index')
+            ->with('success', 'Cliente criado com sucesso!');
+    }
 
-    return redirect()->route('clientes.index')->with('success', 'Cliente atualizado com sucesso!');
-}
-public function destroy(Cliente $cliente)
-{
-    $this->authorize('delete', $cliente);
+    /**
+     * Show the form for editing the specified cliente.
+     */
+    public function edit(Cliente $cliente)
+    {
+        $this->authorize('view', $cliente);
 
-    $cliente->delete();
+        return Inertia::render('Clientes/Edit', [
+            'cliente' => $cliente,
+        ]);
+    }
 
-    return redirect()->route('clientes.index')->with('success', 'Cliente excluído com sucesso!');
-}
+    /**
+     * Update the specified cliente in storage.
+     */
+    public function update(Request $request, Cliente $cliente)
+    {
+        $this->authorize('update', $cliente);
 
+        $validated = $request->validate([
+            'nome'     => 'required|string|max:255',
+            'email'    => 'required|email|unique:clientes,email,' . $cliente->id,
+            'telefone' => 'nullable|string|max:20',
+        ]);
 
+        $cliente->update($validated);
+
+        return redirect()
+            ->route('clientes.index')
+            ->with('success', 'Cliente atualizado com sucesso!');
+    }
+
+    /**
+     * Remove the specified cliente from storage.
+     */
+    public function destroy(Cliente $cliente)
+    {
+        $this->authorize('delete', $cliente);
+
+        $cliente->delete();
+
+        return redirect()
+            ->route('clientes.index')
+            ->with('success', 'Cliente excluído com sucesso!');
+    }
 }
