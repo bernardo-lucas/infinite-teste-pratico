@@ -1,3 +1,76 @@
+# Gestão de Clientes com Laravel + Inertia + Vue 3
+
+<p>Aplicação de exemplo para cadastro, edição e listagem de clientes, com autenticação de usuários e tema claro/escuro, construída com Laravel no back-end e Inertia.js + Vue 3 no front-end.</p>
+
+---
+
+## Tecnologias utilizadas
+
+- PHP 8.x  
+- Laravel 10  
+- Inertia.js + Vue 3  
+- Tailwind CSS  
+- MySQL  
+- Node.js + npm  
+
+---
+
+## Pré-requisitos
+
+<p>Antes de começar, verifique se você tem instalado em sua máquina:</p>
+
+- PHP 8.x  
+- Composer  
+- Node.js (>= 16.x)  
+- npm ou Yarn  
+- Servidor de banco de dados (MySQL, PostgreSQL ou equivalente)  
+
+---
+
+## Instalação
+
+<p>Siga estes passos no terminal:</p>
+
+# Clone o repositório
+```bash
+git clone https://github.com/bernardo-lucas/infinite-teste-pratico.git
+cd infinite-teste-pratico
+```
+
+# Instale dependências
+```bash
+composer install
+npm install
+```
+
+# Copie o .env e gere a chave
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+# Ajuste as configurações de banco em .env
+```.env
+# DB_CONNECTION=...
+# DB_HOST=...
+# DB_PORT=...
+# DB_DATABASE=...
+# DB_USERNAME=...
+# DB_PASSWORD=...
+```
+
+# Rode as migrations e seeders
+```bash
+php artisan migrate
+php artisan db:seed
+```
+
+# Gere assets para desenvolvimento
+```bash
+php artisan serve
+npm run dev
+```
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
